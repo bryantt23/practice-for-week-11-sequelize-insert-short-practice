@@ -5,14 +5,11 @@ require('dotenv').config();
 
 const { Puppy } = require('./db/models');
 
-
 (async () => {
-
   // Delete database if it exists and recreate by running migrations and seeders
   await removeTestDB();
   await runMigrations();
   await runSeeders();
-
 
   // STEP 1
   // Using `build` and `save`, create a record for the following Puppy:
@@ -23,10 +20,17 @@ const { Puppy } = require('./db/models');
   // microchipped: false
   try {
     // Your code here
+    const dog = Puppy.build({
+      name: 'Trudy',
+      age_yrs: 2,
+      weight_lbs: 38,
+      breed: 'Brittany Spaniel',
+      microchipped: false
+    });
+    await dog.save();
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
-
 
   // STEP 2
   // Using `create`, create a record for the following Puppy:
@@ -38,7 +42,6 @@ const { Puppy } = require('./db/models');
   try {
     // Your code here
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
-
 })();
