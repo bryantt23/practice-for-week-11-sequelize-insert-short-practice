@@ -12,11 +12,10 @@ const { Puppy } = require('./db/models');
 
 // Index of all puppies - DO NOT MODIFY
 app.get('/puppies', async (req, res, next) => {
-    const allPuppies = await Puppy.findAll({order: [['name', 'ASC']]});
+  const allPuppies = await Puppy.findAll({ order: [['name', 'ASC']] });
 
-    res.json(allPuppies);
+  res.json(allPuppies);
 });
-
 
 // STEP 3
 // Capture the name, age_yrs, breed, weight_lbs, and microchipped attributes
@@ -24,15 +23,25 @@ app.get('/puppies', async (req, res, next) => {
 // Use these values to create a new Puppy in the database.
 // Respond to the request by sending a success message
 app.post('/puppies', async (req, res, next) => {
-    // Your code here
-})
+  // Your code here
+  const { name, age_yrs, breed, weight_lbs, microchipped } = req.body;
 
+  const dog = Puppy.build({
+    name,
+    age_yrs,
+    weight_lbs: 38,
+    breed,
+    weight_lbs,
+    microchipped
+  });
+  await dog.save();
+});
 
 // Root route - DO NOT MODIFY
 app.get('/', (req, res) => {
-    res.json({
-        message: "API server is running"
-    });
+  res.json({
+    message: 'API server is running'
+  });
 });
 
 // Set port and listen for incoming requests - DO NOT MODIFY
