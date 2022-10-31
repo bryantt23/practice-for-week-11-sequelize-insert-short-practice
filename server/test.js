@@ -41,6 +41,13 @@ const { Puppy } = require('./db/models');
   // microchipped: true
   try {
     // Your code here
+    await Puppy.create({
+      name: 'Beans',
+      age_yrs: 1.6,
+      weight_lbs: 42,
+      breed: 'Bulldog',
+      microchipped: true
+    });
   } catch (err) {
     console.error(err);
   }
